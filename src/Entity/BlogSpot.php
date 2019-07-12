@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,6 +47,16 @@ class BlogSpot
      * @ORM\Column(type="boolean")
      */
     private $featured;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="blogspot_id")
+     */
+    private $categories;
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,6 +131,37 @@ class BlogSpot
     public function setFeatured(bool $featured): self
     {
         $this->featured = $featured;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->setBlogspotId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+            // set the owning side to null (unless already changed)
+            if ($category->getBlogspotId() === $this) {
+                $category->setBlogspotId(null);
+            }
+        }
 
         return $this;
     }
