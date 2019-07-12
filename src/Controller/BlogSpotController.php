@@ -26,7 +26,7 @@ class BlogSpotController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="blog_spot_new", methods={"GET","POST"})
+     * @Route("/admin/new-post", name="blog_spot_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -51,7 +51,7 @@ class BlogSpotController extends AbstractController
     /**
      * @Route("/{id}", name="blog_spot_show", methods={"GET"})
      */
-    public function show(BlogSpot $blogSpot): Response
+    public function showPostAction(BlogSpot $blogSpot): Response
     {
         return $this->render('blog_spot/show.html.twig', [
             'blog_spot' => $blogSpot,
@@ -59,7 +59,7 @@ class BlogSpotController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="blog_spot_edit", methods={"GET","POST"})
+     * @Route("admin/update-post/{id}", name="blog_spot_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, BlogSpot $blogSpot): Response
     {
@@ -79,7 +79,7 @@ class BlogSpotController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="blog_spot_delete", methods={"DELETE"})
+     * @Route("admin/delete-post/{id}", name="blog_spot_delete", methods={"DELETE"})
      */
     public function delete(Request $request, BlogSpot $blogSpot): Response
     {

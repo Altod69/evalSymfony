@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,23 +37,19 @@ class BlogSpot
     private $date;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $category;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $featured;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="blogspot_id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="blogspot_id")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $categories;
+    private $categorie;
 
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -111,18 +105,6 @@ class BlogSpot
         return $this;
     }
 
-    public function getCategory(): ?string
-    {
-        return $this->category;
-    }
-
-    public function setCategory(string $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
     public function getFeatured(): ?bool
     {
         return $this->featured;
@@ -135,33 +117,14 @@ class BlogSpot
         return $this;
     }
 
-    /**
-     * @return Collection|Category[]
-     */
-    public function getCategories(): Collection
+    public function getCategorie(): ?Categorie
     {
-        return $this->categories;
+        return $this->categorie;
     }
 
-    public function addCategory(Category $category): self
+    public function setCategorie(?Categorie $categorie): self
     {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
-            $category->setBlogspotId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Category $category): self
-    {
-        if ($this->categories->contains($category)) {
-            $this->categories->removeElement($category);
-            // set the owning side to null (unless already changed)
-            if ($category->getBlogspotId() === $this) {
-                $category->setBlogspotId(null);
-            }
-        }
+        $this->categorie = $categorie;
 
         return $this;
     }

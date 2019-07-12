@@ -16,7 +16,7 @@ class BlogSpotType extends AbstractType
             ->add('slug')
             ->add('Content')
             ->add('date')
-            ->add('category')
+            ->add('categorie')
             ->add('featured')
         ;
     }

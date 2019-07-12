@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block title %}BlogSpot index{% endblock %}
 
@@ -13,7 +13,7 @@
                 <th>Slug</th>
                 <th>Content</th>
                 <th>Date</th>
-                <th>Category</th>
+                <th>Categorie</th>
                 <th>Featured</th>
                 <th>actions</th>
             </tr>
@@ -26,7 +26,7 @@
                 <td>{{ blog_spot.slug }}</td>
                 <td>{{ blog_spot.Content }}</td>
                 <td>{{ blog_spot.date }}</td>
-                <td>{{ blog_spot.category }}</td>
+                <td>{{ blog_spot.categorie }}</td>
                 <td>{{ blog_spot.featured ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('blog_spot_show', {'id': blog_spot.id}) }}">show</a>
