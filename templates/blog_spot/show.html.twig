@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BlogSpot{% endblock %}
+
+{% block body %}
+    <h1>BlogSpot</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ blog_spot.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ blog_spot.title }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ blog_spot.slug }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ blog_spot.Content }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ blog_spot.date }}</td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <td>{{ blog_spot.category }}</td>
+            </tr>
+            <tr>
+                <th>Featured</th>
+                <td>{{ blog_spot.featured ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('blog_spot_index') }}">back to list</a>
+
+    <a href="{{ path('blog_spot_edit', {'id': blog_spot.id}) }}">edit</a>
+
+    {{ include('blog_spot/_delete_form.html.twig') }}
+{% endblock %}

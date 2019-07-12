@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New BlogSpot{% endblock %}
+
+{% block body %}
+    <h1>Create new BlogSpot</h1>
+
+    {{ include('blog_spot/_form.html.twig') }}
+
+    <a href="{{ path('blog_spot_index') }}">back to list</a>
+{% endblock %}
