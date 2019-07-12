@@ -19,6 +19,20 @@ class BlogSpotRepository extends ServiceEntityRepository
         parent::__construct($registry, BlogSpot::class);
     }
 
+    /**
+    * @return BlogSpot[] Returns an array of BlogSpot objects
+    */
+
+    public function findByCategorie($value)
+    {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.categorie = :val')
+            ->setParameter('val', $value)
+            ->orderBy('b.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     // /**
     //  * @return BlogSpot[] Returns an array of BlogSpot objects
     //  */
